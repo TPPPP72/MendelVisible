@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿using Microsoft.Win32;
+using System.Data;
+using System.IO;
 using System.Windows;
 
 namespace MendelVisible
@@ -8,6 +10,7 @@ namespace MendelVisible
     /// </summary>
     public partial class MainWindow : Window
     {
+        string oridata = string.Empty;
         public MainWindow()
         {
             InitializeComponent();
@@ -36,6 +39,19 @@ namespace MendelVisible
             return strList;
         }
 
+        public static string ChooseSaveFile(string title)
+        {
+            SaveFileDialog dlg = new()
+            {
+                Title = title,
+                FileName = "data.txt",
+                DefaultExt = ".txt",
+                Filter = "Text documents|*.txt",
+            };
+            if (dlg.ShowDialog() == true)
+                return dlg.FileName;
+            return string.Empty;
+        }
         private void Start_Click(object sender, RoutedEventArgs e)
         {
             List<string> res1 = SplitByLen(Data1.Text, 2), res2 = SplitByLen(Data2.Text, 2);
@@ -86,6 +102,7 @@ namespace MendelVisible
                     else
                         result = result + part1[i] + part2[i];
                 }
+                oridata = oridata + result + ' ';
                 time++;
                 if (map.TryGetValue(result, out int value))
                     map[result] = ++value;
@@ -149,9 +166,10 @@ namespace MendelVisible
             Table2.ItemsSource = null;
         }
 
-        private void Save_Click(object sender, RoutedEventArgs e)
+        private async void Save_Click(object sender, RoutedEventArgs e)
         {
-
+            using StreamWriter outputFile = new(ChooseSaveFile("选择数据保存的目录"));
+            await outputFile.WriteAsync(oridata);
         }
     }
 }

@@ -59,7 +59,7 @@
                 <ui:Button x:Name="Save" Margin="0,0,8,0" HorizontalAlignment="Right" Click="Save_Click">
                     <StackPanel Orientation="Horizontal">
                         <ui:SymbolIcon  Symbol="Save24" Margin="0,0,4,0"/>
-                        <ui:TextBlock Text="保存数据" />
+                        <ui:TextBlock Text="保存源数据" />
                     </StackPanel>
                 </ui:Button>
             </StackPanel>
