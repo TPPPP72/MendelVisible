@@ -1,5 +1,5 @@
 # 孟德尔遗传定律数字实验 MendelVisible
-## 本项目使用WPFUI
+## 本项目使用WPFUI https://dev.lepo.co/
 ### 使用
 对于任意亲本形如AaBb、AaBb对，有9:3:3:1的分离比。  
 致死语法为：  
