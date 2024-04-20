@@ -1,0 +1,65 @@
+﻿<Window x:Class="MendelVisible.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MendelVisible"
+        mc:Ignorable="d"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        Title="模拟实验" Width="820" Height="820" MinWidth="650" MinHeight="650">
+
+    <Grid>
+        <ContentPresenter x:Name="RootContentDialog"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <ui:TextBlock Text="配置区" FontTypography="Title" Margin="0,0,0,32"  HorizontalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,12" HorizontalAlignment="Center">
+                        <ui:TextBlock Text="亲本一：" FontTypography="Subtitle" VerticalAlignment="Center"/>
+                        <ui:TextBox x:Name="Data1" PlaceholderText="输入基因型" Width="150"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,12" HorizontalAlignment="Center">
+                        <ui:TextBlock Text="亲本二：" FontTypography="Subtitle" VerticalAlignment="Center"/>
+                        <ui:TextBox x:Name="Data2" PlaceholderText="输入基因型" Width="150"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <ui:TextBlock Text="致死因子对：" FontTypography="Subtitle" VerticalAlignment="Center"/>
+                        <ui:TextBox x:Name="Data3" PlaceholderText="多对使用,隔开" Width="150"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <ui:TextBlock Text="操作区" FontTypography="Title" Margin="0,0,0,32"  HorizontalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,60" HorizontalAlignment="Center">
+                        <ui:TextBlock Text="样本数量："  FontTypography="Subtitle" VerticalAlignment="Center"/>
+                        <ui:NumberBox x:Name="Num" PlaceholderText="输入样本数量" Minimum="1" Width="170" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
+                        <ui:Button x:Name="Start" Appearance="Primary" Content="生成" Width="60" Height="30" Margin="0,0,30,0" Click="Start_Click"/>
+                        <ui:Button x:Name="Clear" Appearance="Secondary"  Content="清空" Width="60" Height="30" Click="Clear_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                <ui:TextBlock Text="详细数据" FontTypography="Title" Margin="0,0,0,8"  HorizontalAlignment="Center"/>
+                <ui:DataGrid x:Name="Table1" IsReadOnly="True" ItemsSource="{Binding}" Width="300" Height="230" Margin="0,0,0,8"/>
+                <ui:TextBlock Text="总览数据" FontTypography="Title" Margin="0,0,0,8"  HorizontalAlignment="Center"/>
+                <ui:DataGrid x:Name="Table2" IsReadOnly="True" ItemsSource="{Binding}" Width="300" Height="230" Margin="0,0,0,8"/>
+                <ui:Button Margin="0,0,8,0" HorizontalAlignment="Right">
+                    <StackPanel Orientation="Horizontal">
+                        <ui:SymbolIcon  Symbol="Save24" Margin="0,0,4,0"/>
+                        <ui:TextBlock Text="保存数据"/>
+                    </StackPanel>
+                </ui:Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
