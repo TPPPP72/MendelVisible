@@ -12,6 +12,7 @@ namespace MendelVisible
         {
             InitializeComponent();
             Num.Value = 1;
+            Precise.Value = 1;
         }
 
         private static List<string> SplitByLen(string str, int separatorCharNum)
@@ -38,21 +39,21 @@ namespace MendelVisible
         private void Start_Click(object sender, RoutedEventArgs e)
         {
             List<string> res1 = SplitByLen(Data1.Text, 2), res2 = SplitByLen(Data2.Text, 2);
-            string[] com = Data3.Text.Split(',');
             List<string> Dis1 = [], Dis2 = [];
-            foreach (var str in com)
+            if (Data3.Text.Length > 0)
             {
-                if (str.Length == 3)
+                string[] com = Data3.Text.Split(',');
+                foreach (var str in com)
                 {
                     if (str[0] == '1')
                         Dis1.Add(str[1..]);
-                    else
+                    else if (str[0] == '2')
                         Dis2.Add(str[1..]);
-                }
-                else if (str.Length == 2)
-                {
-                    Dis1.Add(str);
-                    Dis2.Add(str);
+                    else
+                    {
+                        Dis1.Add(str);
+                        Dis2.Add(str);
+                    }
                 }
             }
             var random = new Random();
@@ -132,7 +133,10 @@ namespace MendelVisible
                     dr = dt.NewRow();
                     dr["表型"] = item.Key;
                     dr["数量"]=item.Value;
-                    dr["比例"] =Convert.ToDouble(((double)item.Value / min)).ToString("0.0");
+                    string precise = "0.";
+                    for (int i = 0; i < Precise.Value; i++)
+                        precise += '0';
+                    dr["比例"] =Convert.ToDouble(((double)item.Value / min)).ToString(precise);
                     dt.Rows.Add(dr);
                 }
                 Table2.DataContext = dt;
@@ -143,6 +147,11 @@ namespace MendelVisible
         {
             Table1.ItemsSource = null;
             Table2.ItemsSource = null;
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

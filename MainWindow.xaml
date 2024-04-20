@@ -6,10 +6,9 @@
         xmlns:local="clr-namespace:MendelVisible"
         mc:Ignorable="d"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-        Title="模拟实验" Width="820" Height="820" MinWidth="650" MinHeight="650">
+        Title="模拟实验" Width="820" Height="820" MinWidth="750" MinHeight="750">
 
     <Grid>
-        <ContentPresenter x:Name="RootContentDialog"/>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -38,9 +37,13 @@
                 </StackPanel>
                 <StackPanel Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <ui:TextBlock Text="操作区" FontTypography="Title" Margin="0,0,0,32"  HorizontalAlignment="Center"/>
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,60" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,12" HorizontalAlignment="Center">
                         <ui:TextBlock Text="样本数量："  FontTypography="Subtitle" VerticalAlignment="Center"/>
-                        <ui:NumberBox x:Name="Num" PlaceholderText="输入样本数量" Minimum="1" Width="170" />
+                        <ui:NumberBox x:Name="Num" Minimum="1" Width="170" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,60" HorizontalAlignment="Center">
+                        <ui:TextBlock Text="浮点位数："  FontTypography="Subtitle" VerticalAlignment="Center"/>
+                        <ui:NumberBox x:Name="Precise" Minimum="0" Maximum="10" Width="170" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
                         <ui:Button x:Name="Start" Appearance="Primary" Content="生成" Width="60" Height="30" Margin="0,0,30,0" Click="Start_Click"/>
@@ -53,13 +56,23 @@
                 <ui:DataGrid x:Name="Table1" IsReadOnly="True" ItemsSource="{Binding}" Width="300" Height="230" Margin="0,0,0,8"/>
                 <ui:TextBlock Text="总览数据" FontTypography="Title" Margin="0,0,0,8"  HorizontalAlignment="Center"/>
                 <ui:DataGrid x:Name="Table2" IsReadOnly="True" ItemsSource="{Binding}" Width="300" Height="230" Margin="0,0,0,8"/>
-                <ui:Button Margin="0,0,8,0" HorizontalAlignment="Right">
+                <ui:Button x:Name="Save" Margin="0,0,8,0" HorizontalAlignment="Right" Click="Save_Click">
                     <StackPanel Orientation="Horizontal">
                         <ui:SymbolIcon  Symbol="Save24" Margin="0,0,4,0"/>
-                        <ui:TextBlock Text="保存数据"/>
+                        <ui:TextBlock Text="保存数据" />
                     </StackPanel>
                 </ui:Button>
             </StackPanel>
         </Grid>
+        <StackPanel Margin="0,0,8,0" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <ui:TextBlock Text="开发者：TPPPP" FontTypography="Body"/>
+            <ui:HyperlinkButton NavigateUri="https://github.com/TPPPP72/MendelVisible">
+                <StackPanel Orientation="Horizontal">
+                    <ui:SymbolIcon Symbol="BookOpen24"/>
+                    <ui:TextBlock Text="Github" FontTypography="Body"/>
+                </StackPanel>
+            </ui:HyperlinkButton>
+        </StackPanel>
+        
     </Grid>
 </Window>
